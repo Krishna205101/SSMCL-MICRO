@@ -1,0 +1,101 @@
+{
+  "name": "ssmcl-host",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/ssmcl-host/src",
+  "prefix": "ssmcl-mfe",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ssmcl-host",
+        "index": "apps/ssmcl-host/src/index.html",
+        "main": "apps/ssmcl-host/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ssmcl-host/tsconfig.app.json",
+        "assets": [
+          "apps/ssmcl-host/src/favicon.ico",
+          "apps/ssmcl-host/src/assets"
+        ],
+        "styles": [
+          "apps/ssmcl-host/src/styles.css",
+          "node_modules/ngx-toastr/toastr.css"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/ssmcl-host/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/ssmcl-host/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:module-federation-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "ssmcl-host:build:production"
+        },
+        "development": {
+          "browserTarget": "ssmcl-host:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ssmcl-host:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/ssmcl-host/**/*.ts",
+          "apps/ssmcl-host/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ssmcl-host/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

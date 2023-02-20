@@ -1,0 +1,54 @@
+<form class="container" [formGroup]="form" (ngSubmit)="register(form.value)">
+    <div class="login">
+      <h2>Registration</h2>
+      <input
+        type="text"
+        class="form-control input-md"
+        placeholder="User Name"
+        formControlName="username"
+      />
+  
+      <!-- <div *ngIf="form.controls.username.status == 'INVALID'">
+          <div *ngIf="form.controls.username.errors">
+  
+          </div>
+      </div> -->
+  
+      <input
+        type="text"
+        class="form-control input-md"
+        placeholder="User Id"
+        formControlName="userid"
+      />
+  
+      <input
+        type="text"
+        class="form-control input-md"
+        placeholder="Email"
+        formControlName="email"
+      />
+  
+      <input
+        type="password"
+        class="form-control input-md"
+        placeholder="Password"
+        formControlName="password"
+      />
+  
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg btn-md"
+        [disabled]="!form.valid"
+      >
+        Register
+      </button>
+    </div>
+    <!-- <div class="instructions">
+      <p style="font-weight: bolder">Instructions</p>
+      <ul>
+        <li><p>Username should be more than 4 letters.</p></li>
+        <li><p>UserId should be unique.</p></li>
+        <li><p>Passwords must match</p></li>
+      </ul>
+    </div> -->
+  </form>

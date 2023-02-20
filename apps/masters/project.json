@@ -1,0 +1,108 @@
+{
+  "name": "masters",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/masters/src",
+  "prefix": "ssmcl-mfe",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/masters",
+        "index": "apps/masters/src/index.html",
+        "main": "apps/masters/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/masters/tsconfig.app.json",
+        "assets": ["apps/masters/src/favicon.ico", "apps/masters/src/assets"],
+        "styles": ["apps/masters/src/styles.css"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/masters/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/masters/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "masters:build:production"
+        },
+        "development": {
+          "browserTarget": "masters:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201,
+        "publicHost": "http://localhost:4201"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "masters:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/masters/**/*.ts", "apps/masters/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/masters/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "masters:build",
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "masters:build:development"
+        },
+        "production": {
+          "buildTarget": "masters:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

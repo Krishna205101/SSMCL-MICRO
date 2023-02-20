@@ -1,0 +1,36 @@
+.navbar {
+  background-color: #4caf50;
+  align-items: center;
+  height: 50px;
+}
+
+.navbar-nav {
+  background-color: #23395b;
+  display: flex;
+  flex: 1;
+}
+
+a {
+  margin-top: 3px;
+  color: white;
+  font-size: 15px;
+}
+
+.date {
+  background-color: white;
+  padding: 0px 3px 0px 3px;
+}
+
+.link:hover {
+  background-color: #dee076;
+}
+
+.nav-item {
+  height: 50px;
+  justify-content: center;
+}
+
+.link {
+  display: flex;
+  flex: 1;
+}

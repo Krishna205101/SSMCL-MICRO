@@ -1,0 +1,10 @@
+a{
+  text-decoration: none;
+  padding : 8px;
+  background-color: rgba(113, 107, 101, 0.809);
+  color:rgb(13, 13, 13)
+}
+
+a:active{
+  background-color: green;
+}

@@ -1,0 +1,27 @@
+a {
+  text-decoration: none;
+  padding-top: 2%;
+  margin: 5px;
+  color: white;
+}
+
+#collapse {
+  position: fixed;
+}
+
+.menu {
+  width: 20px;
+  height: 2px;
+  background-color: black;
+  margin: 4px 0;
+}
+
+.btn {
+  margin: 5px;
+  background-color: #ccdf70;
+  width: 45px;
+}
+
+a:hover {
+  color: #dee076;
+}

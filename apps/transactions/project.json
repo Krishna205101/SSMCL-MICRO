@@ -1,0 +1,114 @@
+{
+  "name": "transactions",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/transactions/src",
+  "prefix": "ssmcl-mfe",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/transactions",
+        "index": "apps/transactions/src/index.html",
+        "main": "apps/transactions/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/transactions/tsconfig.app.json",
+        "assets": [
+          "apps/transactions/src/favicon.ico",
+          "apps/transactions/src/assets"
+        ],
+        "styles": ["apps/transactions/src/styles.css"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/transactions/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/transactions/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "transactions:build:production"
+        },
+        "development": {
+          "browserTarget": "transactions:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "transactions:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/transactions/**/*.ts",
+          "apps/transactions/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/transactions/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "transactions:build",
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "transactions:build:development"
+        },
+        "production": {
+          "buildTarget": "transactions:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

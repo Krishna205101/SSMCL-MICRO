@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col date">
+      <div *ngIf="model; then daystart; else dayend"></div>
+    </div>
+
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item">
+          Date :
+          <h1>{{ currentDate.parsedDate | date : 'dd/MM/yyyy' }}</h1>
+        </li>
+
+        <li class="list-group-item">
+          Status :
+          <h1>{{ currentDate.Status }}</h1>
+        </li>
+
+        <li class="list-group-item">StartedBy : {{ currentDate.StartedBy }}</li>
+
+        <li class="list-group-item">
+          StartTime :
+          {{ currentDate.StartedTime }}
+        </li>
+
+        <li class="list-group-item">ClosedBy : {{ currentDate.Closedby }}</li>
+
+        <li class="list-group-item">
+          ClosedTime : {{ currentDate.ClosedTime }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ng-template #daystart>
+    <div>
+      <p>Transaction Date :</p>
+      <input
+        type="date"
+        value="{{ currentDate.parsedDate | date : 'yyyy-MM-dd' }}"
+        min="{{ currentDate.parsedDate | date : 'yyyy-MM-dd' }}"
+        [(ngModel)]="currentDate.TransactionDate"
+      />
+      <br />
+      <br />
+      <button class="btn btn-success" (click)="beginTransactions()">
+        Begin Day
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #dayend>
+    <div>
+      <button class="btn btn-warning" (click)="endTransactions()">
+        End Day
+      </button>
+    </div>
+  </ng-template>
+</div>

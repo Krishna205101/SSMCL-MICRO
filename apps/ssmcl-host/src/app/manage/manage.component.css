@@ -1,0 +1,18 @@
+.nav {
+  margin: 20px;
+}
+
+.nav-item{
+    background-color: rgb(191, 186, 174);
+}
+
+a{
+    color: black;
+}
+
+a:active,
+a:focus {
+  background-color: rgb(131, 225, 131);
+  color : black
+}
+

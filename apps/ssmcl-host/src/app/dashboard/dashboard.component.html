@@ -1,0 +1,52 @@
+<!-- accountid, description ,a.balance, duedate ,p.interestrate -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <h3>Matured Deposits</h3>
+    </div>
+    <!-- <div class="col-lg-3">
+      <button (click)="download()">Download</button>
+    </div> -->
+  </div>
+
+  <div id="content" #content>
+    <table class="table table-bordred table-hover">
+      <thead class="thead-default">
+        <tr>
+          <th>DepositTYpe</th>
+          <th>Accno</th>
+          <th>Name</th>
+          <th>Balance</th>
+          <th>MaturityDate</th>
+          <th>Roi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let row of rows
+              | paginate
+                : {
+                    id: 'first',
+                    itemsPerPage: 8,
+                    currentPage: p,
+                    totalItems: totalRecords
+                  }
+          "
+        >
+          <td>{{ row.glhead }}</td>
+          <td>{{ row.accountid }}</td>
+          <td>{{ row.description }}</td>
+          <td>{{ row.balance }}</td>
+          <td>{{ row.duedate }}</td>
+          <td>{{ row.interestrate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls
+    id="first"
+    (pageChange)="p = $event"
+  ></pagination-controls>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>UserName</th>
+        <th>UserId</th>
+        <th>E-Mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let user of users
+            | paginate
+              : {
+                  id: 'first',
+                  itemsPerPage: 8,
+                  currentPage: page,
+                  totalItems: totalRecords
+                }
+        "
+      >
+        <td>{{ user.username }}</td>
+        <td>{{ user.userid }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    id="first"
+    (pageChange)="page = $event"
+  ></pagination-controls>
+</div>

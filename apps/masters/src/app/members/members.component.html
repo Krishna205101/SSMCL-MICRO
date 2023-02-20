@@ -1,0 +1,36 @@
+<div>
+  <h2>Members</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let member of members
+            | paginate : { id: 'first', itemsPerPage: 10, currentPage: page }
+        "
+      >
+        <td>{{ member.id }}</td>
+        <!-- <td (click)='view(member.id)'>{{ member.name }}</td> -->
+        <td>
+          <a [routerLink]="['../viewmember']" [state]="{ id: member.id }">{{
+            member.name
+          }}</a>
+        </td>
+        <td class="options">
+          <button type="button" class="btn btn-primary">Edit</button>&nbsp;
+          <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    id="first"
+    (pageChange)="page = $event"
+  ></pagination-controls>
+</div>
